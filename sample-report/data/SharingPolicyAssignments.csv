@@ -1,0 +1,4 @@
+"DisplayName","PrimarySmtpAddress","RecipientTypeDetails","RawSharingPolicy","EffectivePolicyIdentity","Resolution"
+"'=FORMULA","one@example.test","UserMailbox","","Default policy","DefaultInferred"
+"Explicit","two@example.test","SharedMailbox","p1","Default policy","ExplicitMatched"
+"Unresolved","three@example.test","UserMailbox","unknown-reference","","ExplicitMatched-Unresolved"

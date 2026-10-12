@@ -1,0 +1,26 @@
+[
+  {
+    "DisplayName": "=FORMULA",
+    "PrimarySmtpAddress": "one@example.test",
+    "RecipientTypeDetails": "UserMailbox",
+    "RawSharingPolicy": "",
+    "EffectivePolicyIdentity": "Default policy",
+    "Resolution": "DefaultInferred"
+  },
+  {
+    "DisplayName": "Explicit",
+    "PrimarySmtpAddress": "two@example.test",
+    "RecipientTypeDetails": "SharedMailbox",
+    "RawSharingPolicy": "p1",
+    "EffectivePolicyIdentity": "Default policy",
+    "Resolution": "ExplicitMatched"
+  },
+  {
+    "DisplayName": "Unresolved",
+    "PrimarySmtpAddress": "three@example.test",
+    "RecipientTypeDetails": "UserMailbox",
+    "RawSharingPolicy": "unknown-reference",
+    "EffectivePolicyIdentity": "",
+    "Resolution": "ExplicitMatched-Unresolved"
+  }
+]

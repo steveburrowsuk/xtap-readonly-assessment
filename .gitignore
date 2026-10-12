@@ -1,0 +1,5 @@
+CTAP-Assessment-*/
+*.token
+ha-token.txt
+.env
+.env.*

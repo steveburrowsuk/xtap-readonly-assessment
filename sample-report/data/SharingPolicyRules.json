@@ -1,0 +1,26 @@
+[
+  {
+    "PolicyName": "Default policy",
+    "PolicyIdentity": "Default policy",
+    "Enabled": true,
+    "Domain": "*",
+    "Actions": "CalendarSharingFreeBusySimple",
+    "RawRule": "*:CalendarSharingFreeBusySimple"
+  },
+  {
+    "PolicyName": "Default policy",
+    "PolicyIdentity": "Default policy",
+    "Enabled": true,
+    "Domain": "Anonymous",
+    "Actions": "CalendarSharingFreeBusySimple",
+    "RawRule": "Anonymous:CalendarSharingFreeBusySimple"
+  },
+  {
+    "PolicyName": "Default policy",
+    "PolicyIdentity": "Default policy",
+    "Enabled": true,
+    "Domain": "partner.example",
+    "Actions": "CalendarSharingFreeBusyDetail",
+    "RawRule": "partner.example:CalendarSharingFreeBusyDetail"
+  }
+]

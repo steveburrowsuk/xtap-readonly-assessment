@@ -1,0 +1,10 @@
+[
+  {
+    "PolicyName": "Default policy",
+    "PolicyIdentity": "Default policy",
+    "Enabled": true,
+    "Default": true,
+    "ObservedMailboxCount": 2,
+    "Interpretation": "Observed assignments only; absence does not prove unused. Check collection status, limits, scope and unresolved rows."
+  }
+]

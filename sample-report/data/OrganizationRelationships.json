@@ -1,0 +1,25 @@
+[
+  {
+    "Name": "<script>alert(1)</script>",
+    "Identity": "Fixture",
+    "Guid": "r1",
+    "DomainNames": "partner.example; second.example",
+    "Enabled": true,
+    "FreeBusyAccessEnabled": true,
+    "FreeBusyAccessLevel": "LimitedDetails",
+    "FreeBusyAccessScope": "ResourceGroup",
+    "MailTipsAccessEnabled": true,
+    "MailTipsAccessLevel": null,
+    "MailTipsAccessScope": null,
+    "TargetSharingEpr": null,
+    "TargetAutodiscoverEpr": null,
+    "TargetApplicationUri": null,
+    "MailboxMoveEnabled": true,
+    "MailboxMoveCapability": null,
+    "MailboxMovePublishedScopes": null,
+    "PhotosEnabled": null,
+    "DeliveryReportEnabled": null,
+    "ArchiveAccessEnabled": null,
+    "TargetOwaURL": null
+  }
+]

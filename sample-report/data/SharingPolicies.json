@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "Default policy",
+    "Identity": "Default policy",
+    "Guid": "p1",
+    "DistinguishedName": "CN=Default policy",
+    "Enabled": true,
+    "Default": true,
+    "Domains": "*:CalendarSharingFreeBusySimple; Anonymous:CalendarSharingFreeBusySimple; partner.example:CalendarSharingFreeBusyDetail"
+  }
+]

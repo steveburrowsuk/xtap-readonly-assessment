@@ -1,0 +1,4 @@
+"PolicyName","PolicyIdentity","Enabled","Domain","Actions","RawRule"
+"Default policy","Default policy","True","*","CalendarSharingFreeBusySimple","*:CalendarSharingFreeBusySimple"
+"Default policy","Default policy","True","Anonymous","CalendarSharingFreeBusySimple","Anonymous:CalendarSharingFreeBusySimple"
+"Default policy","Default policy","True","partner.example","CalendarSharingFreeBusyDetail","partner.example:CalendarSharingFreeBusyDetail"

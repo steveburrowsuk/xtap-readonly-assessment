@@ -1,0 +1,65 @@
+{
+  "SchemaVersion": "1.0",
+  "BundleVersion": "1.0.0",
+  "GeneratedUtc": "2026-10-12T13:59:32.1985658Z",
+  "ExpectedTenantId": "11111111-1111-1111-1111-111111111111",
+  "TenantVerified": true,
+  "PowerShellVersion": "7.6.5",
+  "ExchangeModuleVersion": "0.0",
+  "MailboxLimit": 0,
+  "MailboxSkipped": false,
+  "ReadOnly": true,
+  "Readiness": "Incomplete: Exchange inventory only; CTAP trust, capabilities, rollout, partner identity and real use unverified",
+  "Statuses": [
+    {
+      "Dataset": "Connection",
+      "Status": "Success",
+      "Count": 1,
+      "Detail": "Customer tenant GUID verified against connected Exchange session.",
+      "TimeUtc": "2026-10-12T13:59:32.0525356Z"
+    },
+    {
+      "Dataset": "OrganizationRelationships",
+      "Status": "Success",
+      "Count": 1,
+      "Detail": "Read completed; visibility remains subject to customer RBAC scope.",
+      "TimeUtc": "2026-10-12T13:59:32.0708976Z"
+    },
+    {
+      "Dataset": "SharingPolicies",
+      "Status": "Success",
+      "Count": 1,
+      "Detail": "Read completed; visibility remains subject to customer RBAC scope.",
+      "TimeUtc": "2026-10-12T13:59:32.0727883Z"
+    },
+    {
+      "Dataset": "AvailabilityAddressSpaces",
+      "Status": "Success",
+      "Count": 1,
+      "Detail": "Read completed; visibility remains subject to customer RBAC scope.",
+      "TimeUtc": "2026-10-12T13:59:32.0734225Z"
+    },
+    {
+      "Dataset": "SharingPolicyAssignments",
+      "Status": "Success",
+      "Count": 3,
+      "Detail": "Read completed; visibility remains subject to customer RBAC scope.",
+      "TimeUtc": "2026-10-12T13:59:32.1339936Z"
+    },
+    {
+      "Dataset": "MailboxCoverage",
+      "Status": "RequestedUnlimited",
+      "Count": 3,
+      "Detail": "Active mailbox inventory only; scoped RBAC can still restrict visibility. Inactive and soft-deleted mailboxes excluded.",
+      "TimeUtc": "2026-10-12T13:59:32.1346463Z"
+    },
+    {
+      "Dataset": "GraphCTAP",
+      "Status": "NotAssessed",
+      "Count": 0,
+      "Detail": "Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.",
+      "TimeUtc": "2026-10-12T13:59:32.1476962Z"
+    }
+  ],
+  "SyntheticDemonstration": true
+}

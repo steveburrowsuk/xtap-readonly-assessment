@@ -1,0 +1,11 @@
+[
+  {
+    "Identity": "aas1",
+    "ForestName": "partner.example",
+    "AccessMethod": "OrgWideFBToken",
+    "TargetAutodiscoverEpr": "https://autodiscover.example",
+    "TargetServiceEpr": null,
+    "TargetTenantId": "",
+    "UseServiceAccount": null
+  }
+]

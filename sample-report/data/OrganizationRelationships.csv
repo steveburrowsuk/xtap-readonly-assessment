@@ -1,0 +1,2 @@
+"Name","Identity","Guid","DomainNames","Enabled","FreeBusyAccessEnabled","FreeBusyAccessLevel","FreeBusyAccessScope","MailTipsAccessEnabled","MailTipsAccessLevel","MailTipsAccessScope","TargetSharingEpr","TargetAutodiscoverEpr","TargetApplicationUri","MailboxMoveEnabled","MailboxMoveCapability","MailboxMovePublishedScopes","PhotosEnabled","DeliveryReportEnabled","ArchiveAccessEnabled","TargetOwaURL"
+"<script>alert(1)</script>","Fixture","r1","partner.example; second.example","True","True","LimitedDetails","ResourceGroup","True",,,,,,"True",,,,,,

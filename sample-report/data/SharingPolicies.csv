@@ -1,0 +1,2 @@
+"Name","Identity","Guid","DistinguishedName","Enabled","Default","Domains"
+"Default policy","Default policy","p1","CN=Default policy","True","True","*:CalendarSharingFreeBusySimple; Anonymous:CalendarSharingFreeBusySimple; partner.example:CalendarSharingFreeBusyDetail"

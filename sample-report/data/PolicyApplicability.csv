@@ -1,0 +1,2 @@
+"PolicyName","PolicyIdentity","Enabled","Default","ObservedMailboxCount","Interpretation"
+"Default policy","Default policy","True","True","2","Observed assignments only; absence does not prove unused. Check collection status, limits, scope and unresolved rows."
