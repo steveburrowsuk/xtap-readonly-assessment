@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # Synthetic tests only. Fake Exchange module takes precedence in child processes.
 [CmdletBinding()]
-param([string]$WorkPath = (Join-Path ([IO.Path]::GetTempPath()) ('CTAP-Tests-'+[guid]::NewGuid().ToString('N'))))
+param([string]$WorkPath = (Join-Path ([IO.Path]::GetTempPath()) ('XTAP-Tests-'+[guid]::NewGuid().ToString('N'))))
 $ErrorActionPreference='Stop'
 if (Test-Path -LiteralPath $WorkPath) { throw 'Test work directory must not exist.' }
 $null=New-Item -ItemType Directory -Path $WorkPath
@@ -15,51 +15,51 @@ function Get-ConnectionInformation {
     # Before connection the mock returns empty once; after connect it reports the fixture tenant.
     if (-not $script:checked) { $script:checked=$true; return }
     $tenant='11111111-1111-1111-1111-111111111111'
-    if ($env:CTAP_TEST_CASE -eq 'WrongTenant') { $tenant='22222222-2222-2222-2222-222222222222' }
+    if ($env:XTAP_TEST_CASE -eq 'WrongTenant') { $tenant='22222222-2222-2222-2222-222222222222' }
     [pscustomobject]@{State='Connected';TenantID=$tenant}
 }
 function Get-OrganizationRelationship {
     [CmdletBinding()]param()
-    if ($env:CTAP_TEST_CASE -eq 'Denied') {
+    if ($env:XTAP_TEST_CASE -eq 'Denied') {
         Write-Error 'Access denied fixture' -Category PermissionDenied; return
     }
-    if ($env:CTAP_TEST_CASE -eq 'Empty') { return }
+    if ($env:XTAP_TEST_CASE -eq 'Empty') { return }
     [pscustomobject]@{Name='<script>alert(1)</script>';Identity='Fixture';Guid='r1';DomainNames=@('partner.example','second.example');Enabled=$true;FreeBusyAccessEnabled=$true;FreeBusyAccessLevel='LimitedDetails';MailTipsAccessEnabled=$true;MailboxMoveEnabled=$true;FreeBusyAccessScope='ResourceGroup'}
-    if ($env:CTAP_TEST_CASE -eq 'Partial') { Write-Error 'Synthetic transport interruption' -Category ConnectionError }
+    if ($env:XTAP_TEST_CASE -eq 'Partial') { Write-Error 'Synthetic transport interruption' -Category ConnectionError }
 }
 function Get-SharingPolicy {
     [CmdletBinding()]param()
-    if ($env:CTAP_TEST_CASE -eq 'Empty') { return }
+    if ($env:XTAP_TEST_CASE -eq 'Empty') { return }
     [pscustomobject]@{Name='Default policy';Identity='Default policy';Guid='p1';DistinguishedName='CN=Default policy';Enabled=$true;Default=$true;Domains=@('*:CalendarSharingFreeBusySimple','Anonymous:CalendarSharingFreeBusySimple','partner.example:CalendarSharingFreeBusyDetail')}
 }
 function Get-AvailabilityAddressSpace {
     [CmdletBinding()]param()
-    if ($env:CTAP_TEST_CASE -eq 'Empty') { return }
+    if ($env:XTAP_TEST_CASE -eq 'Empty') { return }
     [pscustomobject]@{Identity='aas1';ForestName='partner.example';AccessMethod='OrgWideFBToken';TargetTenantId='';TargetAutodiscoverEpr='https://autodiscover.example'}
 }
 function Get-EXOMailbox {
     [CmdletBinding()]param($ResultSize,$Properties)
-    if ($env:CTAP_TEST_CASE -eq 'Empty') { return }
-    if ($env:CTAP_TEST_CASE -eq 'MissingProperty') {
+    if ($env:XTAP_TEST_CASE -eq 'Empty') { return }
+    if ($env:XTAP_TEST_CASE -eq 'MissingProperty') {
         [pscustomobject]@{DisplayName='Missing';PrimarySmtpAddress='missing@example.test';RecipientTypeDetails='UserMailbox'}; return
     }
     [pscustomobject]@{DisplayName='=FORMULA';PrimarySmtpAddress='one@example.test';RecipientTypeDetails='UserMailbox';SharingPolicy=$null}
     [pscustomobject]@{DisplayName='Explicit';PrimarySmtpAddress='two@example.test';RecipientTypeDetails='SharedMailbox';SharingPolicy='p1'}
     [pscustomobject]@{DisplayName='Unresolved';PrimarySmtpAddress='three@example.test';RecipientTypeDetails='UserMailbox';SharingPolicy='unknown-reference'}
 }
-if ($env:CTAP_TEST_CASE -eq 'Unavailable') {
+if ($env:XTAP_TEST_CASE -eq 'Unavailable') {
     Export-ModuleMember -Function Connect-ExchangeOnline,Disconnect-ExchangeOnline,Get-ConnectionInformation,Get-OrganizationRelationship,Get-SharingPolicy,Get-EXOMailbox
 } else { Export-ModuleMember -Function * }
 '@ | Set-Content -LiteralPath (Join-Path $moduleDir 'ExchangeOnlineManagement.psm1') -Encoding utf8
-$main=Join-Path (Split-Path $PSScriptRoot -Parent) 'scripts/Invoke-CTAPAssessment.ps1'
+$main=Join-Path (Split-Path $PSScriptRoot -Parent) 'scripts/Invoke-XTAPAssessment.ps1'
 $oldModulePath=$env:PSModulePath
-$oldCase=$env:CTAP_TEST_CASE
+$oldCase=$env:XTAP_TEST_CASE
 $results=[Collections.Generic.List[object]]::new()
 function Assert($Condition,$Message) { if (-not $Condition) { throw "Assertion failed: $Message" } }
 try {
     $env:PSModulePath=(Join-Path $WorkPath 'modules')+[IO.Path]::PathSeparator+$oldModulePath
     foreach ($case in @('Success','Empty','Denied','Partial','WrongTenant','MissingProperty','Unavailable','Limited','Skipped')) {
-        $env:CTAP_TEST_CASE=$case
+        $env:XTAP_TEST_CASE=$case
         $out=Join-Path $WorkPath $case
         $extra=@()
         if ($case -eq 'Limited') { $extra=@('-MailboxLimit','100') }
@@ -93,7 +93,7 @@ try {
         $results.Add([pscustomobject]@{Case=$case;ExitCode=$exitCode;Result='PASS'})
     }
     # Existing output must not be overwritten.
-    $env:CTAP_TEST_CASE='Success'
+    $env:XTAP_TEST_CASE='Success'
     & (Join-Path $PSHOME 'pwsh.exe') -NoProfile -File $main -ExpectedTenantId '11111111-1111-1111-1111-111111111111' -OutputPath (Join-Path $WorkPath 'Success') 2>$null | Out-Null
     Assert ($LASTEXITCODE -ne 0) 'existing output refused'
     $results.Add([pscustomobject]@{Case='ExistingOutput';ExitCode=$LASTEXITCODE;Result='PASS'})
@@ -114,5 +114,5 @@ try {
     Write-Host "Synthetic evidence: $WorkPath"
 } finally {
     $env:PSModulePath=$oldModulePath
-    $env:CTAP_TEST_CASE=$oldCase
+    $env:XTAP_TEST_CASE=$oldCase
 }

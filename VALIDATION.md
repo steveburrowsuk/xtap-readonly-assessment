@@ -7,4 +7,6 @@ Additional checks passed: PowerShell syntax parsing, scan for known Exchange/Gra
 
 The sample report is prominently labeled synthetic. Test evidence is in tests/Last-Offline-TestResults.csv. To repeat, run tests/Test-Offline.ps1 in PowerShell 7.4+; it creates a fresh temporary fake module and child processes and restores the parent module path. It does not connect to Microsoft. Fixture directories are retained as local evidence.
 
-Limitations: not tested against a live customer tenant, actual Exchange View-Only RBAC, MFA/Conditional Access or national clouds. Large-tenant performance and browser rendering were not tested. Static HTML structure, links and encoded values were verified. Tenant-wide visibility must be confirmed externally. Existing CTAP trust/capabilities, actual sharing activity, partner hosting/IDs and rollout are not established. Graph expansion remains a non-executing stub.
+Limitations: not tested against a live customer tenant, actual Exchange View-Only RBAC, MFA/Conditional Access or national clouds. Large-tenant performance and browser rendering were not tested. Static HTML structure, links and encoded values were verified. Tenant-wide visibility must be confirmed externally. Existing XTAP trust/capabilities, actual sharing activity, partner hosting/IDs and rollout are not established. Graph expansion remains a non-executing stub.
+
+XTAP naming update validated on 2 November 2026: all ten existing offline synthetic scenarios passed after renaming scripts and references. No customer tenant was contacted.

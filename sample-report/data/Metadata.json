@@ -1,6 +1,6 @@
 {
   "SchemaVersion": "1.0",
-  "BundleVersion": "1.0.0",
+  "BundleVersion": "1.0.1",
   "GeneratedUtc": "2026-10-12T13:59:32.1985658Z",
   "ExpectedTenantId": "11111111-1111-1111-1111-111111111111",
   "TenantVerified": true,
@@ -9,7 +9,7 @@
   "MailboxLimit": 0,
   "MailboxSkipped": false,
   "ReadOnly": true,
-  "Readiness": "Incomplete: Exchange inventory only; CTAP trust, capabilities, rollout, partner identity and real use unverified",
+  "Readiness": "Incomplete: Exchange inventory only; XTAP trust, capabilities, rollout, partner identity and real use unverified",
   "Statuses": [
     {
       "Dataset": "Connection",
@@ -54,7 +54,7 @@
       "TimeUtc": "2026-10-12T13:59:32.1346463Z"
     },
     {
-      "Dataset": "GraphCTAP",
+      "Dataset": "GraphXTAP",
       "Status": "NotAssessed",
       "Count": 0,
       "Detail": "Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.",

@@ -2,7 +2,7 @@
 
 Use a customer identity already assigned Exchange Online **View-Only Organization Management**, containing View-Only Configuration and View-Only Recipients, with the intended read scope. The scripts do not assign roles. No Graph consent, app registration, secret, Entra administrator role or write permission is required initially.
 
-Microsoft's CTAP migration procedure states Organization Management for inventory. Its RBAC documentation supports trying the view-only configuration and recipient roles first. This is a least-privilege test, not a guarantee of every cmdlet and parameter in every tenant. Actual reads are tested independently; failed reads do not trigger elevation.
+Microsoft's XTAP migration procedure states Organization Management for inventory. Its RBAC documentation supports trying the view-only configuration and recipient roles first. This is a least-privilege test, not a guarantee of every cmdlet and parameter in every tenant. Actual reads are tested independently; failed reads do not trigger elevation.
 
 | Read | Purpose | Initial strategy |
 |---|---|---|

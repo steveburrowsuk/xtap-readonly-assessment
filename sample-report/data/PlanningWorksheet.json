@@ -9,7 +9,7 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "Preserve relationship; inspect mailbox moves, photos, archive, delivery reports and OWA",
     "NextStep": "Confirm partner tenant, reciprocal configuration, direction, scopes, access levels and current business use."
   },
@@ -23,7 +23,7 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "Preserve relationship; inspect mailbox moves, photos, archive, delivery reports and OWA",
     "NextStep": "Confirm partner tenant, reciprocal configuration, direction, scopes, access levels and current business use."
   },
@@ -37,7 +37,7 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "Anonymous, wildcard and contact-sharing rules require separate review",
     "NextStep": "Confirm enabled policy, applicability and intended calendar detail. Wildcard is not a tenant ID; do not map automatically."
   },
@@ -51,7 +51,7 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "Anonymous, wildcard and contact-sharing rules require separate review",
     "NextStep": "Confirm enabled policy, applicability and intended calendar detail. Wildcard is not a tenant ID; do not map automatically."
   },
@@ -65,7 +65,7 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "Anonymous, wildcard and contact-sharing rules require separate review",
     "NextStep": "Confirm enabled policy, applicability and intended calendar detail. Wildcard is not a tenant ID; do not map automatically."
   },
@@ -79,8 +79,8 @@
     "PartnerTenantId": "",
     "BusinessOwner": "",
     "PartnerHosting": "Unverified",
-    "ExistingCTAP": "Not assessed",
+    "ExistingXTAP": "Not assessed",
     "OtherFeatures": "OrgWideFBToken is not dependent on EWS; do not label every address space EWS-affected",
-    "NextStep": "Confirm hosting and access method; assess CTAP separately. Preserve hybrid/on-premises configuration."
+    "NextStep": "Confirm hosting and access method; assess XTAP separately. Preserve hybrid/on-premises configuration."
   }
 ]

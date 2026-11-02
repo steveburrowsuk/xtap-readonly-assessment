@@ -5,4 +5,4 @@
 "AvailabilityAddressSpaces","Success","1","Read completed; visibility remains subject to customer RBAC scope.","2026-10-12T13:59:32.0734225Z"
 "SharingPolicyAssignments","Success","3","Read completed; visibility remains subject to customer RBAC scope.","2026-10-12T13:59:32.1339936Z"
 "MailboxCoverage","RequestedUnlimited","3","Active mailbox inventory only; scoped RBAC can still restrict visibility. Inactive and soft-deleted mailboxes excluded.","2026-10-12T13:59:32.1346463Z"
-"GraphCTAP","NotAssessed","0","Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.","2026-10-12T13:59:32.1476962Z"
+"GraphXTAP","NotAssessed","0","Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.","2026-10-12T13:59:32.1476962Z"

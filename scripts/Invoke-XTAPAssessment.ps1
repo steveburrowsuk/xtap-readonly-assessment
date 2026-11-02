@@ -6,7 +6,7 @@ Use a fresh PowerShell process. Output directories must not exist.
 param(
     [Parameter(Mandatory)][string]$ExpectedTenantId,
     [string]$UserPrincipalName,
-    [string]$OutputPath = (Join-Path (Get-Location) ('CTAP-Assessment-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [guid]::NewGuid().ToString('N').Substring(0,6))),
+    [string]$OutputPath = (Join-Path (Get-Location) ('XTAP-Assessment-' + (Get-Date -Format 'yyyyMMdd-HHmmss') + '-' + [guid]::NewGuid().ToString('N').Substring(0,6))),
     [switch]$SkipMailboxAssignments,
     [ValidateRange(0,2147483647)][int]$MailboxLimit = 0,
     [switch]$UseExistingConnection
@@ -126,17 +126,17 @@ try {
     $planning = [System.Collections.Generic.List[object]]::new()
     foreach ($rel in $rels) {
         foreach ($domain in @($rel.DomainNames)) {
-            $planning.Add([pscustomobject]@{Source='OrganizationRelationship';SourceName=[string]$rel.Name;PartnerDomain=[string]$domain;Capabilities='Review FreeBusyAccessEnabled and MailTipsAccessEnabled with Enabled';Disposition='Review';LegacyScope=([string]$rel.FreeBusyAccessScope + '; ' + [string]$rel.MailTipsAccessScope);PartnerTenantId='';BusinessOwner='';PartnerHosting='Unverified';ExistingCTAP='Not assessed';OtherFeatures='Preserve relationship; inspect mailbox moves, photos, archive, delivery reports and OWA';NextStep='Confirm partner tenant, reciprocal configuration, direction, scopes, access levels and current business use.'})
+            $planning.Add([pscustomobject]@{Source='OrganizationRelationship';SourceName=[string]$rel.Name;PartnerDomain=[string]$domain;Capabilities='Review FreeBusyAccessEnabled and MailTipsAccessEnabled with Enabled';Disposition='Review';LegacyScope=([string]$rel.FreeBusyAccessScope + '; ' + [string]$rel.MailTipsAccessScope);PartnerTenantId='';BusinessOwner='';PartnerHosting='Unverified';ExistingXTAP='Not assessed';OtherFeatures='Preserve relationship; inspect mailbox moves, photos, archive, delivery reports and OWA';NextStep='Confirm partner tenant, reciprocal configuration, direction, scopes, access levels and current business use.'})
         }
     }
     foreach ($rule in $rules) {
-        $planning.Add([pscustomobject]@{Source='SharingPolicy';SourceName=$rule.PolicyName;PartnerDomain=$rule.Domain;Capabilities=$rule.Actions;Disposition='Review';LegacyScope='Observed mailbox policy assignments; see applicability';PartnerTenantId='';BusinessOwner='';PartnerHosting='Unverified';ExistingCTAP='Not assessed';OtherFeatures='Anonymous, wildcard and contact-sharing rules require separate review';NextStep='Confirm enabled policy, applicability and intended calendar detail. Wildcard is not a tenant ID; do not map automatically.'})
+        $planning.Add([pscustomobject]@{Source='SharingPolicy';SourceName=$rule.PolicyName;PartnerDomain=$rule.Domain;Capabilities=$rule.Actions;Disposition='Review';LegacyScope='Observed mailbox policy assignments; see applicability';PartnerTenantId='';BusinessOwner='';PartnerHosting='Unverified';ExistingXTAP='Not assessed';OtherFeatures='Anonymous, wildcard and contact-sharing rules require separate review';NextStep='Confirm enabled policy, applicability and intended calendar detail. Wildcard is not a tenant ID; do not map automatically.'})
     }
     foreach ($space in $spaces) {
-        $planning.Add([pscustomobject]@{Source='AvailabilityAddressSpace';SourceName=[string]$space.ForestName;PartnerDomain=[string]$space.ForestName;Capabilities='Free/Busy review';Disposition='Review';LegacyScope=[string]$space.AccessMethod;PartnerTenantId=[string]$space.TargetTenantId;BusinessOwner='';PartnerHosting='Unverified';ExistingCTAP='Not assessed';OtherFeatures='OrgWideFBToken is not dependent on EWS; do not label every address space EWS-affected';NextStep='Confirm hosting and access method; assess CTAP separately. Preserve hybrid/on-premises configuration.'})
+        $planning.Add([pscustomobject]@{Source='AvailabilityAddressSpace';SourceName=[string]$space.ForestName;PartnerDomain=[string]$space.ForestName;Capabilities='Free/Busy review';Disposition='Review';LegacyScope=[string]$space.AccessMethod;PartnerTenantId=[string]$space.TargetTenantId;BusinessOwner='';PartnerHosting='Unverified';ExistingXTAP='Not assessed';OtherFeatures='OrgWideFBToken is not dependent on EWS; do not label every address space EWS-affected';NextStep='Confirm hosting and access method; assess XTAP separately. Preserve hybrid/on-premises configuration.'})
     }
     $datasets.PlanningWorksheet = $planning.ToArray()
-    Add-Status 'GraphCTAP' 'NotAssessed' 0 'Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.'
+    Add-Status 'GraphXTAP' 'NotAssessed' 0 'Exchange-only run. No Graph connection, trust lookup, capabilities lookup or rollout verification.'
     foreach ($name in @($datasets.Keys)) {
         $rows = @($datasets[$name])
         ConvertTo-Json -InputObject $rows -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputPath "data/$name.json") -Encoding utf8
@@ -154,14 +154,14 @@ try {
         if ($safe.Count -gt 0) { $safe | Export-Csv -LiteralPath (Join-Path $OutputPath "data/$name.csv") -NoTypeInformation -Encoding utf8 }
         else { '"NoRows"' | Set-Content -LiteralPath (Join-Path $OutputPath "data/$name.csv") -Encoding utf8 }
     }
-    $metadata = [ordered]@{SchemaVersion='1.0';BundleVersion='1.0.0';GeneratedUtc=[datetime]::UtcNow.ToString('o');ExpectedTenantId=$expectedGuid.ToString();TenantVerified=$connectionOK;PowerShellVersion=[string]$PSVersionTable.PSVersion;ExchangeModuleVersion=[string](Get-Module ExchangeOnlineManagement | Select-Object -First 1 -ExpandProperty Version);MailboxLimit=$MailboxLimit;MailboxSkipped=[bool]$SkipMailboxAssignments;ReadOnly=$true;Readiness='Incomplete: Exchange inventory only; CTAP trust, capabilities, rollout, partner identity and real use unverified';Statuses=$statuses.ToArray()}
+    $metadata = [ordered]@{SchemaVersion='1.0';BundleVersion='1.0.1';GeneratedUtc=[datetime]::UtcNow.ToString('o');ExpectedTenantId=$expectedGuid.ToString();TenantVerified=$connectionOK;PowerShellVersion=[string]$PSVersionTable.PSVersion;ExchangeModuleVersion=[string](Get-Module ExchangeOnlineManagement | Select-Object -First 1 -ExpandProperty Version);MailboxLimit=$MailboxLimit;MailboxSkipped=[bool]$SkipMailboxAssignments;ReadOnly=$true;Readiness='Incomplete: Exchange inventory only; XTAP trust, capabilities, rollout, partner identity and real use unverified';Statuses=$statuses.ToArray()}
     $metadata | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $OutputPath 'data/Metadata.json') -Encoding utf8
     $statuses | Export-Csv -LiteralPath (Join-Path $OutputPath 'data/CollectionStatus.csv') -NoTypeInformation -Encoding utf8
-    & (Join-Path $PSScriptRoot 'New-CTAPHtmlReport.ps1') -ReportPath $OutputPath
+    & (Join-Path $PSScriptRoot 'New-XTAPHtmlReport.ps1') -ReportPath $OutputPath
     Write-Host "Report saved to $OutputPath"
     $failures = @($statuses | Where-Object Status -in @('Failed','NotAttempted','CommandUnavailable','IncompleteProperties','PermissionDenied','ReadFailed','PartialRead'))
     $code = if (-not $connectionOK) {2} elseif ($failures.Count -gt 0) {1} else {0}
-    Write-Host "Inventory exit code: $code (0 = requested reads complete, 1 = incomplete inventory, 2 = connection failure). CTAP readiness remains unverified."
+    Write-Host "Inventory exit code: $code (0 = requested reads complete, 1 = incomplete inventory, 2 = connection failure). XTAP readiness remains unverified."
 } finally {
     if ($connectedByScript) { Disconnect-ExchangeOnline -Confirm:$false -ErrorAction SilentlyContinue }
 }

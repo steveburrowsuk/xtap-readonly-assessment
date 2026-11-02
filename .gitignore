@@ -1,4 +1,4 @@
-CTAP-Assessment-*/
+XTAP-Assessment-*/
 *.token
 ha-token.txt
 .env
